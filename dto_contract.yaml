@@ -1,0 +1,41 @@
+info:
+  version: 0.0.1
+
+dtos:
+  book :
+    attributes :
+      - name : title
+        type : string
+      - name : author
+        type : string
+      - name : price
+        type : float
+
+  shelf:
+    attributes :
+      - name : name
+        type : string
+      - name : location
+        type : integer
+      - name : books
+        type : array
+        items :
+          type : book
+
+  library:
+    attributes :
+      - name : name
+        type : string
+      - name : genre
+        type : map
+        keys :
+          type : string
+        values :
+          type : array
+          items :
+            type : shelf
+      - name : shelves
+        type : array
+        items :
+          type : shelf
+
