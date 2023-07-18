@@ -1,4 +1,6 @@
 import argparse
+from dtogenerator import DtoGenerator
+
 
 arg_parser = argparse.ArgumentParser(description="Generate DTOs from a YAML file")
 arg_parser.add_argument(
@@ -27,4 +29,4 @@ if args.lang == "java" and not args.java_package:
 
 
 if __name__ == "__main__":
-    pass
+    dto_generator = DtoGenerator('../dto_contract.yaml', '../out', 'java', 'com.example.hello')
