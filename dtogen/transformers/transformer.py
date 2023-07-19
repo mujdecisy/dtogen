@@ -1,11 +1,41 @@
 from dtogen.interfaces import Dto, Attribute, DtoGenArgs, ClassInfo
 
-primitive_types = {"integer", "float", "string", "boolean"}
+PRIMITIVE_TYPES = {"integer", "float", "string", "boolean"}
 
 
-class _Transformer:
-    args: dict
+class Transformer:
+    def __init__(self, args: DtoGenArgs) -> None:
+        self.args = args
 
+    def get_class_header(self, class_name: str) -> str:
+        raise NotImplementedError("get_class_header not implemented")
+
+    def get_class_footer(self) -> str:
+        raise NotImplementedError("get_class_footer not implemented")
+
+    def get_class_name(self, class_name: str) -> str:
+        raise NotImplementedError("get_class_name not implemented")
+
+    def get_primitive_type(self, item: dict) -> str:
+        raise NotImplementedError("get_primitive_attribute_line not implemented")
+
+    def get_array_type(self) -> str:
+        raise NotImplementedError("get_array_attribute_line not implemented")
+
+    def get_map_type(self) -> str:
+        raise NotImplementedError("get_map_attribute_line not implemented")
+
+    def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
+        raise NotImplementedError("get_attribute_line not implemented")
+
+    def transform_type(self, item: Attribute) -> str:
+        raise NotImplementedError("transform_type not implemented")
+
+    def transform(self, class_name: str, data: Dto) -> ClassInfo:
+        raise NotImplementedError("transform not implemented")
+
+
+class __Transformer(Transformer):
     def __init__(self, args: DtoGenArgs) -> None:
         self.args = args
 
@@ -32,7 +62,7 @@ class _Transformer:
 
     def transform_type(self, item: Attribute) -> str:
         type_ = None
-        if item.type in primitive_types:
+        if item.type in PRIMITIVE_TYPES:
             type_ = self.get_primitive_type(item)
         elif item.type == "array":
             type_ = self.get_array_type()

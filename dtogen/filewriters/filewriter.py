@@ -3,12 +3,29 @@ import os
 from typing import List
 from dtogen.interfaces import ClassInfo, FileInfo, DtoGenArgs, Info
 
+class FileWriter:
+    args: DtoGenArgs
+    classes: List[ClassInfo]
+    dto_gen_info: Info
 
-class _FileWriter:
     def __init__(self, args: DtoGenArgs, classes: List[ClassInfo], dto_gen_info: Info):
         self.args = args
         self.classes = classes
         self.dto_gen_info = dto_gen_info
+
+    def get_extension(self) -> str:
+        raise NotImplementedError('get_extension not implemented')
+
+    def generate_files(self) -> List[FileInfo]:
+        raise NotImplementedError('generate_files not implemented')
+
+    def generate_comment(self, comment: str) -> str:
+        raise NotImplementedError('generate_comment not implemented')
+
+    def write(self):
+        raise NotImplementedError('write not implemented')
+
+class __FileWriter(FileWriter):
 
     def get_extension(self) -> str:
         raise NotImplementedError('get_extension not implemented')

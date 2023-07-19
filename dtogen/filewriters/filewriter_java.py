@@ -1,8 +1,8 @@
 from typing import List
 from dtogen.interfaces import FileInfo
-from dtogen.filewriters.filewriter import _FileWriter
+from dtogen.filewriters.filewriter import __FileWriter
 
-class FileWriterJava(_FileWriter):
+class FileWriterJava(__FileWriter):
 
     def get_extension(self) -> str:
         return 'java'
