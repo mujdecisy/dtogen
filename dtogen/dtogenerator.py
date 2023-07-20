@@ -1,5 +1,5 @@
-from dtogen.transformers import Transformer, TransformerJava, TransformerPython
-from dtogen.filewriters import FileWriter, FileWriterJava, FileWriterPython
+from dtogen.transformers import Transformer, TransformerJava, TransformerPython, TransformerTypescript
+from dtogen.filewriters import FileWriter, FileWriterJava, FileWriterPython, FileWriterTypescript
 import yaml
 from mapperr import to_obj
 from dtogen.interfaces import DtoGenYaml, DtoGenArgs
@@ -15,7 +15,8 @@ class __LangClass:
 
 _LANGUAGE_CLASSES: Dict[str, __LangClass] = {
     "java": __LangClass(TransformerJava, FileWriterJava),
-    "python": __LangClass(TransformerPython, FileWriterPython)
+    "python": __LangClass(TransformerPython, FileWriterPython),
+    "typescript": __LangClass(TransformerTypescript, FileWriterTypescript)
 }
 
 class DtoGenerator:

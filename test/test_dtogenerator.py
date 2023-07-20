@@ -7,7 +7,7 @@ class TestDtoGenerator(TestCase):
         dto_gen_args = DtoGenArgs()
         dto_gen_args.input_file = 'dto_contract.yaml'
         dto_gen_args.output_dir = 'test_dir'
-        dto_gen_args.lang = 'python'
+        dto_gen_args.lang = 'typescript'
         dto_gen_args.java_package = 'com.example.hello'
 
         generator = DtoGenerator(dto_gen_args)

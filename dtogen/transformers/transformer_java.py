@@ -11,31 +11,6 @@ class TransformerJava(__Transformer):
     def get_class_footer(self) -> str:
         return "}\n"
 
-    def get_class_name(self, class_name: str) -> str:
-        if len(class_name) < 3:
-            raise ValueError("Class name must be at least 5 characters long")
-
-        i = 1
-        while i < len(class_name):
-            if (class_name[i].isupper() and not class_name[i - 1].isupper()) or (
-                class_name[i].islower() and not class_name[i - 1].islower()
-            ):
-                if not class_name[i - 1].isalpha():
-                    class_name = class_name[:i-1] + "-" + class_name[i:]
-                else:
-                    class_name = class_name[:i] + "-" + class_name[i:]
-                i += 2
-            i += 1
-
-        # split class name with non-alphanumeric characters
-        class_name_alphanum = class_name.replace("[^\w^\d]+", "-")
-        return "".join(
-            [
-                word[0].upper() + word[1:].lower()
-                for word in class_name_alphanum.split("-")
-            ]
-        )
-
     def get_primitive_type(self, item: NestedAttribute) -> str:
         return {
             "integer": "Integer",
