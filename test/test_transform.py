@@ -2,7 +2,7 @@ from unittest import TestCase
 from dtogen.transformers.transformer_java import TransformerJava
 
 
-class TestTransformJava(TestCase):
+class TestTransform(TestCase):
     def test_class_name_converter_when_class_name_is_all_lowercase(self):
         transformer = TransformerJava(None)
         class_name = 'test'
