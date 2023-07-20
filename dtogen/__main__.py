@@ -29,4 +29,6 @@ if args.lang == "java" and not args.java_package:
 
 
 if __name__ == "__main__":
-    dto_generator = DtoGenerator('../dto_contract.yaml', '../out', 'java', 'com.example.hello')
+    dto_generator = DtoGenerator(
+        "../dto_contract.yaml", "../out", "java", "com.example.hello"
+    )

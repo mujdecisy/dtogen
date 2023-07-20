@@ -2,10 +2,10 @@ from typing import List
 from dtogen.interfaces import FileInfo
 from dtogen.filewriters.filewriter import __FileWriter
 
-class FileWriterJava(__FileWriter):
 
+class FileWriterJava(__FileWriter):
     def get_extension(self) -> str:
-        return 'java'
+        return "java"
 
     def generate_comment(self, comment: str) -> str:
         return f"// {comment}"

@@ -67,7 +67,7 @@ class __Transformer(Transformer):
                 class_name[i].islower() and not class_name[i - 1].islower()
             ):
                 if not class_name[i - 1].isalpha():
-                    class_name = class_name[:i-1] + "-" + class_name[i:]
+                    class_name = class_name[: i - 1] + "-" + class_name[i:]
                 else:
                     class_name = class_name[:i] + "-" + class_name[i:]
                 i += 2

@@ -2,10 +2,10 @@ from typing import List
 from dtogen.interfaces import FileInfo
 from dtogen.filewriters.filewriter import __FileWriter
 
-class FileWriterTypescript(__FileWriter):
 
+class FileWriterTypescript(__FileWriter):
     def get_extension(self) -> str:
-        return 'ts'
+        return "ts"
 
     def generate_comment(self, comment: str) -> str:
         return f"// {comment}"
