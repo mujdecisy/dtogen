@@ -3,3 +3,6 @@
 htmlcov
 out_*/
 .coverage
+dist
+*.egg-info
+**.DS_Store
