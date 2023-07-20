@@ -1,6 +1,10 @@
 # DTOgen - Data Transfer Object Generator
 
-DTOgen is a powerful library that allows users to effortlessly generate Data Transfer Object (DTO) classes in multiple programming languages from YAML definitions. DTOgen aims to simplify the process of mapping JSON or XML data to objects, making it an excellent tool for microservices development. With DTOgen, syncing Data Transfer Objects (DTOs) across services becomes a seamless process. Since DTOgen allows you to define DTOs in a centralized YAML file and generates the corresponding classes in multiple programming languages, you can ensure consistency across your microservices easily. 
+DTOgen is a powerful library that allows users to **effortlessly generate Data Transfer Object (DTO) classes** in multiple programming languages from YAML definitions. DTOgen aims to **simplify the process of mapping** JSON or XML data to objects, making it an excellent tool for microservices development.
+
+With DTOgen, syncing Data Transfer Objects (DTOs) across services becomes a seamless process. Since DTOgen allows you to define DTOs in a centralized YAML file and **generates the corresponding classes in multiple programming languages**, you can ensure consistency across your microservices easily. 
+
+DTOgen is designed to handle not only simple data types but also **complex data structures** like lists and maps. With the ability to represent lists and maps in the YAML definitions, DTOgen can generate DTO classes that accurately reflect these data structures in multiple programming languages.
 
 ## Features
 
