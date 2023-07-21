@@ -1,15 +1,13 @@
-from dtogen.transformers import (
-    Transformer,
-    TransformerJava,
-    TransformerPython,
-    TransformerTypescript,
-)
-from dtogen.filewriters import (
-    FileWriter,
-    FileWriterJava,
-    FileWriterPython,
-    FileWriterTypescript,
-)
+from dtogen.transformers.transformer import Transformer
+from dtogen.transformers.transformer_java import TransformerJava
+from dtogen.transformers.transformer_python import TransformerPython
+from dtogen.transformers.transformer_typescript import TransformerTypescript
+
+from dtogen.filewriters.filewriter import FileWriter
+from dtogen.filewriters.filewriter_java import FileWriterJava
+from dtogen.filewriters.filewriter_python import FileWriterPython
+from dtogen.filewriters.filewriter_typescript import FileWriterTypescript
+
 import yaml
 from mapperr import to_obj
 from dtogen.interfaces import DtoGenYaml, DtoGenArgs
