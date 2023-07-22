@@ -1,4 +1,4 @@
-from dtogen.interfaces import Dto, Attribute, DtoGenArgs, ClassInfo
+from ..interfaces import Dto, Attribute, DtoGenArgs, ClassInfo
 
 PRIMITIVE_TYPES = {"integer", "float", "string", "boolean"}
 

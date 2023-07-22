@@ -1,7 +1,7 @@
 import os
 
 from typing import List
-from dtogen.interfaces import ClassInfo, FileInfo, DtoGenArgs, Info
+from ..interfaces import ClassInfo, FileInfo, DtoGenArgs, Info
 
 
 class FileWriter:

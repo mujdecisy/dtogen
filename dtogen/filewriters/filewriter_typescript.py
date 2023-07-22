@@ -1,6 +1,6 @@
 from typing import List
-from dtogen.interfaces import FileInfo
-from dtogen.filewriters.filewriter import __FileWriter
+from ..interfaces import FileInfo
+from .filewriter import __FileWriter
 
 
 class FileWriterTypescript(__FileWriter):

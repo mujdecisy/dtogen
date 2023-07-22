@@ -1,5 +1,5 @@
 import argparse
-from dtogen.dtogenerator import DtoGenerator
+from .dtogenerator import DtoGenerator
 
 
 arg_parser = argparse.ArgumentParser(description="Generate DTOs from a YAML file")

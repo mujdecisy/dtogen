@@ -1,5 +1,5 @@
-from dtogen.transformers.transformer import __Transformer
-from dtogen.interfaces import NestedAttribute
+from .transformer import __Transformer
+from ..interfaces import NestedAttribute
 
 
 class TransformerTypescript(__Transformer):
