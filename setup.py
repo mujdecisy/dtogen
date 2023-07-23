@@ -1,5 +1,5 @@
 import os.path
-from setuptools import setup, find_packages
+from setuptools import setup
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -8,7 +8,7 @@ with open(os.path.join(HERE, "README.md")) as fid:
 
 setup(
     name="dtogen",
-    version="0.0.6",
+    version="0.0.7",
     description="DTO generator for Java, TypeScript, Python",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -19,7 +19,7 @@ setup(
     classifiers=[
         "Programming Language :: Python :: 3",
     ],
-    packages=find_packages(exclude=["test", "test.*"]),
+    packages=['dtogen','dtogen.transformers','dtogen.filewriters'],
     include_package_data=True,
     install_requires=["mapperr", "pyyaml"],
 )
