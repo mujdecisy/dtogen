@@ -8,7 +8,7 @@ with open(os.path.join(HERE, "README.md")) as fid:
 
 setup(
     name="dtogen",
-    version="0.0.7",
+    version="0.0.13",
     description="DTO generator for Java, TypeScript, Python",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -21,5 +21,5 @@ setup(
     ],
     packages=['dtogen','dtogen.transformers','dtogen.filewriters'],
     include_package_data=True,
-    install_requires=["mapperr", "pyyaml"],
+    install_requires=["mapperr==0.2.4", "pyyaml"],
 )
