@@ -11,6 +11,31 @@ dtos:
         type : string
       - name : price
         type : float
+      - name : genre
+        type : string
+      - name : detail
+        type : object
+
+  historyBook :
+    attributes :
+      - name : whichCentury
+        type : integer
+      - name : origin
+        type : string
+
+  dictionaryBook:
+    attributes :
+      - name : fromLang
+        type : string
+      - name : toLang
+        type : string
+
+  mangaBook:
+    attributes :
+      - name : colored
+        type : boolean
+      - name : serieName
+        type : string
 
   shelf:
     attributes :
@@ -39,4 +64,21 @@ dtos:
         type : array
         items :
           type : shelf
+
+relations:
+  bookDetailGenreRelation:
+    info:
+      entity1:
+        name: genre
+        type: string
+      entity2:
+        name: bookDetail
+        type: class
+    attributes:
+      - entity1: history
+        entity2: historyBook
+      - entity1: dictionary
+        entity2: dictionaryBook
+      - entity1: manga
+        entity2: mangaBook
 

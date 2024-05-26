@@ -9,13 +9,13 @@ class TransformerTypescript(__Transformer):
     def get_class_footer(self) -> str:
         return "}\n\n\n"
 
-    def get_primitive_type(self, item: NestedAttribute) -> str:
+    def get_primitive_type(self, type_name: str) -> str:
         return {
             "integer": "number",
             "float": "number",
             "string": "string",
             "boolean": "boolean",
-        }[item.type]
+        }[type_name]
 
     def get_array_type(self) -> str:
         return "<item>[]"

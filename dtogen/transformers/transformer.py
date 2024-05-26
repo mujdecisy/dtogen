@@ -1,6 +1,6 @@
-from ..interfaces import Dto, Attribute, DtoGenArgs, ClassInfo
+from ..interfaces import Dto, Attribute, DtoGenArgs, ClassInfo, Relation
 
-PRIMITIVE_TYPES = {"integer", "float", "string", "boolean"}
+PRIMITIVE_TYPES = {"integer", "float", "string", "boolean", "class", "object"}
 
 
 class Transformer:
@@ -16,7 +16,7 @@ class Transformer:
     def get_class_name(self, class_name: str) -> str:
         raise NotImplementedError("get_class_name not implemented")
 
-    def get_primitive_type(self, item: dict) -> str:
+    def get_primitive_type(self, type_name: str) -> str:
         raise NotImplementedError("get_primitive_attribute_line not implemented")
 
     def get_array_type(self) -> str:
@@ -28,10 +28,16 @@ class Transformer:
     def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
         raise NotImplementedError("get_attribute_line not implemented")
 
+    def create_private_static_final_map_attr(self, relation: Relation) -> str:
+        raise NotImplementedError("create_private_static_final_map_attr not implemented")
+
+    def create_mapper_function(self, relation: Relation, class_name: str) -> str:
+        raise NotImplementedError("create_mapper_function not implemented")
+
     def transform_type(self, item: Attribute) -> str:
         raise NotImplementedError("transform_type not implemented")
 
-    def transform(self, class_name: str, data: Dto) -> ClassInfo:
+    def transform_dto(self, class_name: str, data: Dto) -> ClassInfo:
         raise NotImplementedError("transform not implemented")
 
 
@@ -45,7 +51,7 @@ class __Transformer(Transformer):
     def get_class_footer(self) -> str:
         raise NotImplementedError("get_class_footer not implemented")
 
-    def get_primitive_type(self, item: dict) -> str:
+    def get_primitive_type(self, type_name: str) -> str:
         raise NotImplementedError("get_primitive_attribute_line not implemented")
 
     def get_array_type(self) -> str:
@@ -56,6 +62,12 @@ class __Transformer(Transformer):
 
     def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
         raise NotImplementedError("get_attribute_line not implemented")
+
+    def create_private_static_final_map_attr(self, relation: Relation) -> str:
+        raise NotImplementedError("create_private_static_final_map_attr not implemented")
+
+    def create_mapper_function(self, relation: Relation, class_name: str) -> str:
+        raise NotImplementedError("create_mapper_function not implemented")
 
     def get_class_name(self, class_name: str) -> str:
         if len(class_name) < 3:
@@ -85,7 +97,7 @@ class __Transformer(Transformer):
     def transform_type(self, item: Attribute) -> str:
         type_ = None
         if item.type in PRIMITIVE_TYPES:
-            type_ = self.get_primitive_type(item)
+            type_ = self.get_primitive_type(item.type)
         elif item.type == "array":
             type_ = self.get_array_type()
             array_item_type = self.transform_type(item.items)
@@ -100,12 +112,27 @@ class __Transformer(Transformer):
             type_ = self.get_class_name(item.type)
         return type_
 
-    def transform(self, class_name: str, data: Dto) -> ClassInfo:
+    def transform_dto(self, class_name: str, data: Dto) -> ClassInfo:
         class_text = self.get_class_header(class_name) + "\n"
         for attribute in data.attributes:
             attribute_name = attribute.name
             attribute_type = self.transform_type(attribute)
             class_text += self.get_attribute_line(attribute_name, attribute_type) + "\n"
+        class_text += self.get_class_footer()
+
+        class_info = ClassInfo()
+        class_info.class_name = self.get_class_name(class_name)
+        class_info.class_text = class_text
+
+        return class_info
+
+
+    def transform_relation(self, class_name: str, data: Relation) -> ClassInfo:
+        class_text = self.get_class_header(class_name) + "\n"
+
+        class_text += self.create_private_static_final_map_attr(data) + "\n"
+        class_text += self.create_mapper_function(data, class_name) + "\n"
+
         class_text += self.get_class_footer()
 
         class_info = ClassInfo()

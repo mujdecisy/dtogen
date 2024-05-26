@@ -21,9 +21,27 @@ class Dto:
     attributes: List[Attribute]
 
 
+class RelAttribute:
+    entity1: str
+    entity2: str
+
+class RelationInfoAttr:
+    name: str
+    type: str
+
+class RelationInfo:
+    entity1: RelationInfoAttr
+    entity2: RelationInfoAttr
+
+class Relation:
+    info: RelationInfo
+    attributes: List[RelAttribute]
+
+
 class DtoGenYaml:
     info: Info
     dtos: Dict[str, Dto]
+    relations: Dict[str, Relation]
 
 
 class ClassInfo:

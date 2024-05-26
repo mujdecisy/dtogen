@@ -51,7 +51,11 @@ class DtoGenerator:
 
         class_info_list = []
         for class_name, dto in data.dtos.items():
-            class_info = transformer.transform(class_name, dto)
+            class_info = transformer.transform_dto(class_name, dto)
+            class_info_list.append(class_info)
+
+        for class_name, relation in data.relations.items():
+            class_info = transformer.transform_relation(class_name, relation)
             class_info_list.append(class_info)
 
         file_writer: FileWriter = _LANGUAGE_CLASSES[self.args.lang].filewriter(

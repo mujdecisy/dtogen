@@ -11,13 +11,13 @@ class TransformerJava(__Transformer):
     def get_class_footer(self) -> str:
         return "}\n"
 
-    def get_primitive_type(self, item: NestedAttribute) -> str:
+    def get_primitive_type(self, type_name: str) -> str:
         return {
             "integer": "Integer",
             "float": "Float",
             "string": "String",
             "boolean": "Boolean",
-        }[item.type]
+        }[type_name]
 
     def get_array_type(self) -> str:
         return "List<<item>>"
