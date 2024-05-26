@@ -8,6 +8,9 @@ class TransformerJava(__Transformer):
         header += f"public class {self.get_class_name(class_name)} {'{'}"
         return header
 
+    def get_relation_class_header(self, class_name: str) -> str:
+        return self.get_class_header(class_name)
+
     def get_class_footer(self) -> str:
         return "}\n"
 

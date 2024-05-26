@@ -10,6 +10,9 @@ class Transformer:
     def get_class_header(self, class_name: str) -> str:
         raise NotImplementedError("get_class_header not implemented")
 
+    def get_relation_class_header(self, class_name: str) -> str:
+        raise NotImplementedError("get_relation_class_header not implemented")
+
     def get_class_footer(self) -> str:
         raise NotImplementedError("get_class_footer not implemented")
 
@@ -29,7 +32,9 @@ class Transformer:
         raise NotImplementedError("get_attribute_line not implemented")
 
     def create_private_static_final_map_attr(self, relation: Relation) -> str:
-        raise NotImplementedError("create_private_static_final_map_attr not implemented")
+        raise NotImplementedError(
+            "create_private_static_final_map_attr not implemented"
+        )
 
     def create_mapper_function(self, relation: Relation, class_name: str) -> str:
         raise NotImplementedError("create_mapper_function not implemented")
@@ -48,6 +53,9 @@ class __Transformer(Transformer):
     def get_class_header(self, class_name: str) -> str:
         raise NotImplementedError("get_class_header not implemented")
 
+    def get_relation_class_header(self, class_name: str) -> str:
+        raise NotImplementedError("get_relation_class_header not implemented")
+
     def get_class_footer(self) -> str:
         raise NotImplementedError("get_class_footer not implemented")
 
@@ -64,7 +72,9 @@ class __Transformer(Transformer):
         raise NotImplementedError("get_attribute_line not implemented")
 
     def create_private_static_final_map_attr(self, relation: Relation) -> str:
-        raise NotImplementedError("create_private_static_final_map_attr not implemented")
+        raise NotImplementedError(
+            "create_private_static_final_map_attr not implemented"
+        )
 
     def create_mapper_function(self, relation: Relation, class_name: str) -> str:
         raise NotImplementedError("create_mapper_function not implemented")
@@ -126,9 +136,8 @@ class __Transformer(Transformer):
 
         return class_info
 
-
     def transform_relation(self, class_name: str, data: Relation) -> ClassInfo:
-        class_text = self.get_class_header(class_name) + "\n"
+        class_text = self.get_relation_class_header(class_name) + "\n"
 
         class_text += self.create_private_static_final_map_attr(data) + "\n"
         class_text += self.create_mapper_function(data, class_name) + "\n"

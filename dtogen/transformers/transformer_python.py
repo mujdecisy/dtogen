@@ -6,6 +6,9 @@ class TransformerPython(__Transformer):
     def get_class_header(self, class_name: str) -> str:
         return f"class {self.get_class_name(class_name)}:"
 
+    def get_relation_class_header(self, class_name: str) -> str:
+        return self.get_class_header(class_name)
+
     def get_class_footer(self) -> str:
         return "\n\n"
 
@@ -16,7 +19,7 @@ class TransformerPython(__Transformer):
             "string": "str",
             "boolean": "bool",
             "class": "type",
-            "object": "object"
+            "object": "object",
         }[type_name]
 
     def get_array_type(self) -> str:
