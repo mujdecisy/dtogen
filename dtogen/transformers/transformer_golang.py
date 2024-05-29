@@ -62,16 +62,16 @@ class TransformerGolang(__Transformer):
         e1c = self.get_primitive_type(relation.info.entity1.type)
         e2c = self.get_primitive_type(relation.info.entity2.type)
 
-        class_name = self.get_class_name(class_name)
+        formatted_class_name = self.get_class_name(class_name)
 
         text = f"""
-type { class_name } struct{'{}'}
+type { formatted_class_name } struct{'{}'}
 
-func (x {class_name}) {e1n}To{e2n}(value {e1c}) {e2c} {'{'}
+func (x {formatted_class_name}) {e1n}To{e2n}(value {e1c}) {e2c} {'{'}
     return {class_name}_e1e2[value]
 {'}'}
 
-func (x {class_name}) {e2n}To{e1n}(value {e2c}) {e1c} {'{'}
+func (x {formatted_class_name}) {e2n}To{e1n}(value {e2c}) {e1c} {'{'}
     return {class_name}_e2e1[value]
 {'}'}
 """
