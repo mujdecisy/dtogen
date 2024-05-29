@@ -10,7 +10,10 @@ class TransformerTypescript(__Transformer):
         return f"export class {self.get_class_name(class_name)} {'{'}"
 
     def get_class_footer(self) -> str:
-        return "}\n\n\n"
+        return "}\n\n"
+
+    def get_relation_class_footer(self) -> str:
+        return self.get_class_footer()
 
     def get_primitive_type(self, type_name: str) -> str:
         return {
@@ -31,14 +34,6 @@ class TransformerTypescript(__Transformer):
     def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
         return f"    {attribute_name}: {attribute_type}"
 
-    def __create_literal(self, value: str, type: str) -> str:
-        keyval = value
-        if type == "string":
-            keyval = f'"{value}"'
-        elif type == "class":
-            keyval = self.get_class_name(value)
-        return keyval
-
     def create_private_static_final_map_attr(self, relation: Relation) -> str:
         e1c = self.get_primitive_type(relation.info.entity1.type)
         e2c = self.get_primitive_type(relation.info.entity2.type)
@@ -46,18 +41,18 @@ class TransformerTypescript(__Transformer):
         is_e1_class = relation.info.entity1.type == "class"
         is_e2_class = relation.info.entity2.type == "class"
 
-        e1ckey = 'string' if is_e1_class else e1c
-        e2ckey = 'string' if is_e2_class else e2c
+        e1ckey = "string" if is_e1_class else e1c
+        e2ckey = "string" if is_e2_class else e2c
 
         text = f"    private static readonly e1_e2: {'{'}[key: {e1ckey}]: {e2c}{'}'} = {'{'}"
         text_reversed = f"    private static readonly e2_e1: {'{'}[key: {e2ckey}]: {e1c}{'}'} = {'{'}"
 
         for item in relation.attributes:
-            e1l = self.__create_literal(item.entity1, relation.info.entity1.type)
-            e2l = self.__create_literal(item.entity2, relation.info.entity2.type)
+            e1l = self.create_literal(item.entity1, relation.info.entity1.type)
+            e2l = self.create_literal(item.entity2, relation.info.entity2.type)
 
-            text += f"{ self.__create_literal(e1l, 'string')  if is_e1_class else e1l}: {e2l}, "
-            text_reversed += f"{ self.__create_literal(e2l, 'string')  if is_e2_class else e2l}: {e1l}, "
+            text += f"{ self.create_literal(e1l, 'string')  if is_e1_class else e1l}: {e2l}, "
+            text_reversed += f"{ self.create_literal(e2l, 'string')  if is_e2_class else e2l}: {e1l}, "
 
         text += "   };\n"
         text_reversed += "  };\n"

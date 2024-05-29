@@ -14,6 +14,9 @@ class TransformerJava(__Transformer):
     def get_class_footer(self) -> str:
         return "}\n"
 
+    def get_relation_class_footer(self) -> str:
+        return self.get_class_footer()
+
     def get_primitive_type(self, type_name: str) -> str:
         return {
             "integer": "Integer",
@@ -21,7 +24,7 @@ class TransformerJava(__Transformer):
             "string": "String",
             "boolean": "Boolean",
             "class": "Class",
-            "object": "Object"
+            "object": "Object",
         }[type_name]
 
     def get_array_type(self) -> str:
@@ -33,14 +36,6 @@ class TransformerJava(__Transformer):
     def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
         return f"    public {attribute_type} {attribute_name};"
 
-    def __create_literal(self, value: str, type: str) -> str:
-        keyval = value
-        if type == "string":
-            keyval = f'"{value}"'
-        elif type == "class":
-            keyval = self.get_class_name(value)
-        return keyval
-
     def create_private_static_final_map_attr(self, relation: Relation) -> str:
         e1c = self.get_primitive_type(relation.info.entity1.type)
         e2c = self.get_primitive_type(relation.info.entity2.type)
@@ -49,8 +44,8 @@ class TransformerJava(__Transformer):
         text_reversed = f"    private static final Map<{e2c}, {e1c}> e2_e1 = new HashMap<>() {'{{'}\n"
 
         for item in relation.attributes:
-            e1l = self.__create_literal(item.entity1, relation.info.entity1.type)
-            e2l = self.__create_literal(item.entity2, relation.info.entity2.type)
+            e1l = self.create_literal(item.entity1, relation.info.entity1.type)
+            e2l = self.create_literal(item.entity2, relation.info.entity2.type)
 
             text += f"      put({e1l}, {e2l});\n"
             text_reversed += f"      put({e2l}, {e1l});\n"

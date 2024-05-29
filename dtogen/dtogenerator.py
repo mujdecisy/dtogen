@@ -4,6 +4,7 @@ from .transformers import (
     TransformerJava,
     TransformerPython,
     TransformerTypescript,
+    TransformerGolang,
 )
 
 from .filewriters import (
@@ -11,6 +12,7 @@ from .filewriters import (
     FileWriterJava,
     FileWriterPython,
     FileWriterTypescript,
+    FileWriterGolang,
 )
 
 import yaml
@@ -33,6 +35,7 @@ _LANGUAGE_CLASSES: Dict[str, __LangClass] = {
     "java": __LangClass(TransformerJava, FileWriterJava),
     "python": __LangClass(TransformerPython, FileWriterPython),
     "typescript": __LangClass(TransformerTypescript, FileWriterTypescript),
+    "golang": __LangClass(TransformerGolang, FileWriterGolang),
 }
 
 

@@ -17,7 +17,7 @@ def main():
         type=str,
         required=True,
         help="output language",
-        choices=["python", "java", "typescript"],
+        choices=["python", "java", "typescript", "golang"],
     )
     arg_parser.add_argument(
         "--java-package", metavar="PACKAGE", type=str, help="Java package"

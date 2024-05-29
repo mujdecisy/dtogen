@@ -16,6 +16,9 @@ class Transformer:
     def get_class_footer(self) -> str:
         raise NotImplementedError("get_class_footer not implemented")
 
+    def get_relation_class_footer(self) -> str:
+        raise NotImplementedError("get_relation_class_footer not implemented")
+
     def get_class_name(self, class_name: str) -> str:
         raise NotImplementedError("get_class_name not implemented")
 
@@ -39,6 +42,9 @@ class Transformer:
     def create_mapper_function(self, relation: Relation, class_name: str) -> str:
         raise NotImplementedError("create_mapper_function not implemented")
 
+    def create_literal(self, value: str, type: str) -> str:
+        raise NotImplementedError("create_literal not implemented")
+
     def transform_type(self, item: Attribute) -> str:
         raise NotImplementedError("transform_type not implemented")
 
@@ -58,6 +64,9 @@ class __Transformer(Transformer):
 
     def get_class_footer(self) -> str:
         raise NotImplementedError("get_class_footer not implemented")
+
+    def get_relation_class_footer(self) -> str:
+        raise NotImplementedError("get_relation_class_footer not implemented")
 
     def get_primitive_type(self, type_name: str) -> str:
         raise NotImplementedError("get_primitive_attribute_line not implemented")
@@ -122,6 +131,14 @@ class __Transformer(Transformer):
             type_ = self.get_class_name(item.type)
         return type_
 
+    def create_literal(self, value: str, type: str) -> str:
+        keyval = value
+        if type == "string":
+            keyval = f'"{value}"'
+        elif type == "class":
+            keyval = self.get_class_name(value)
+        return keyval
+
     def transform_dto(self, class_name: str, data: Dto) -> ClassInfo:
         class_text = self.get_class_header(class_name) + "\n"
         for attribute in data.attributes:
@@ -142,7 +159,7 @@ class __Transformer(Transformer):
         class_text += self.create_private_static_final_map_attr(data) + "\n"
         class_text += self.create_mapper_function(data, class_name) + "\n"
 
-        class_text += self.get_class_footer()
+        class_text += self.get_relation_class_footer()
 
         class_info = ClassInfo()
         class_info.class_name = self.get_class_name(class_name)
