@@ -34,7 +34,7 @@ class Transformer:
     def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
         raise NotImplementedError("get_attribute_line not implemented")
 
-    def create_private_static_final_map_attr(self, relation: Relation) -> str:
+    def create_private_static_final_map_attr(self, relation: Relation, class_name: str) -> str:
         raise NotImplementedError(
             "create_private_static_final_map_attr not implemented"
         )
@@ -80,7 +80,7 @@ class __Transformer(Transformer):
     def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
         raise NotImplementedError("get_attribute_line not implemented")
 
-    def create_private_static_final_map_attr(self, relation: Relation) -> str:
+    def create_private_static_final_map_attr(self, relation: Relation, class_name: str) -> str:
         raise NotImplementedError(
             "create_private_static_final_map_attr not implemented"
         )
@@ -156,7 +156,7 @@ class __Transformer(Transformer):
     def transform_relation(self, class_name: str, data: Relation) -> ClassInfo:
         class_text = self.get_relation_class_header(class_name) + "\n"
 
-        class_text += self.create_private_static_final_map_attr(data) + "\n"
+        class_text += self.create_private_static_final_map_attr(data, class_name) + "\n"
         class_text += self.create_mapper_function(data, class_name) + "\n"
 
         class_text += self.get_relation_class_footer()

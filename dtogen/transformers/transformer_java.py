@@ -36,7 +36,7 @@ class TransformerJava(__Transformer):
     def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
         return f"    public {attribute_type} {attribute_name};"
 
-    def create_private_static_final_map_attr(self, relation: Relation) -> str:
+    def create_private_static_final_map_attr(self, relation: Relation, class_name: str) -> str:
         e1c = self.get_primitive_type(relation.info.entity1.type)
         e2c = self.get_primitive_type(relation.info.entity2.type)
 

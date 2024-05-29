@@ -34,7 +34,7 @@ class TransformerPython(__Transformer):
     def get_attribute_line(self, attribute_name: str, attribute_type: str) -> str:
         return f"    {attribute_name}: {attribute_type}"
 
-    def create_private_static_final_map_attr(self, relation: Relation) -> str:
+    def create_private_static_final_map_attr(self, relation: Relation, class_name: str) -> str:
         text = f"    __e1_e2 = {'{'}"
         text_reversed = f"    __e2_e1 = {'{'}"
         for item in relation.attributes:
