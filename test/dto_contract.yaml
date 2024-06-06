@@ -60,10 +60,6 @@ dtos:
           type : array
           items :
             type : shelf
-      - name : shelves
-        type : array
-        items :
-          type : shelf
 
 relations:
   bookDetailGenreRelation:
@@ -81,4 +77,22 @@ relations:
         entity2: dictionaryBook
       - entity1: manga
         entity2: mangaBook
+
+  numberToTextRelation:
+    info:
+      entity1:
+        name: number
+        type: integer
+      entity2:
+        name: text
+        type: string
+    attributes:
+      - entity1: "1"
+        entity2: one
+      - entity1: "2"
+        entity2: two
+      - entity1: "3"
+        entity2: three
+      - entity1: "4"
+        entity2: four
 
